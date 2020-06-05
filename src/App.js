@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
 
+
 class App extends Component {
   state = {
     todos: [],
@@ -11,12 +12,28 @@ class App extends Component {
     axios.get("http://localhost:4000/api/v1/todos").then((res) => {
       console.log(res);
       this.setState({
-        todos: res.data.slice(0, 10),
+        todos: res.data
       });
     });
   }
 
+
+  removeFromTodos = () => {
+      
+      axios.delete("http://localhost:4000/api/v1/todos/:id")
+        .then((res) => {
+          console.log(res);
+          this.setState({
+            todos: res.data
+          })
+        })
+        .catch((error) => console.log(error));
+    }
+
+
+
   render() {
+    
     const { todos } = this.state;
     const todosList = todos.length ? (
       todos.map((post) => {
@@ -33,6 +50,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <button onClick={()=>{this.removeFromTodos()}} >Delete</button>
         <h1>Todos list</h1>
         {todosList}
       </div>
