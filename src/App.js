@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
+import AddTodo from "./AddTodo";
 
 
 class App extends Component {
@@ -51,6 +52,7 @@ class App extends Component {
     return (
       <div className="App">
         <button onClick={()=>{this.removeFromTodos()}} >Delete</button>
+        <AddTodo/>
         <h1>Todos list</h1>
         {todosList}
       </div>
